@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustStreamIt, le site de classement de films</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Logo JustStreamIt" title="JustStreamIt, le site de classement de films">
+        <p class="main_title">Vidéos à la demande</p>
+        <!-- utiliser des templates / copyNode https://www.youtube.com/watch?v=oh6Wtys98ig&t=169s -->
+    </header>
+    <main>
+        <section>
+            <h1>Meilleur film</h1>
+            <div class="film-best">
+                <div class="film-best__img">
+                    <img src="images/img_test4.jpg" alt="photo_best_film">
+                </div>
+                <div class="film-best__info">
+                    <div class="film-best__title">
+                        <h2>The Big Lebowski</h2>
+                    </div>
+                    <div class="film-best__description">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                    <div class="film-best__button_container">
+                        <button class="film-best__button">Détails</button>
+                        <div class="modal">
+                            <div class="modal-content">
+                                <span class="close-modal-cross">&times;</span>
+                                <div class="modal-info">
+                                    <div class="modal-info__title">
+                                        <h3>The Big Lebowski</h3>
+                                        <p>1998</p>
+                                        <p>Réalisé par : Joel Cohen, Ethan Cohen</p>
+                                    </div>
+                                    <div class="modal-info__image">
+                                        <img src="images/img_test4.jpg" alt="photo_best_film">
+                                    </div>
+                                </div>
+                                <div class="modal-description">
+                                    <p>Blablabla...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                </div>
+                                <div class="modal-actors">
+                                    <h4>Avec :</h4>
+                                    <p>Jeff Bridges</p>
+                                <button class="close-modal-btn">Fermer</button>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="categorie_1">
+            <h1>Catégorie 1</h1>
+            <div class="category_container">
+                <!-- <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test3.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 1</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test1.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 2</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test2.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 3</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test4.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 4</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test2.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 5</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test3.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 6</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="btn-see-more_container">
+                <button class="btn-see-more">Voir plus</button>
+            </div>
+        <br>
+        </section>
+        <section class="categorie_2">
+            <h1>Catégorie 2</h1>
+            <div class="category_container">
+                <!-- <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test3.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 1</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test1.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 2</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test2.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 3</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test4.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 4</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test2.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 5</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div>
+                <div class="film_item">
+                    <div class="content">
+                        <img src="images/img_test3.jpg" alt="xxxxxx">
+                        <h2>Titre de l'élément 6</h2>
+                        <button class="film_button">Détails</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="btn-see-more_container">
+                <button class="btn-see-more">Voir plus</button>
+            </div>
+        <br>
+        </section>
+        <section class="categorie_3">
+            <h1>Autres :</h1>
+            <div class="select-container">
+                <select id="genre-select">
+                  <option value="action">Films d'action</option>
+                  <option value="comedie">Comédies</option>
+                  <option value="drame">Famille</option>
+                </select>
+              </div>      
+        </section>
+    </main>
+    <template id="film-item-template">
+        <div class="film_item">
+            <div class="content">
+                <img class="film-img">
+                <h2 class="film-title"></h2>
+                <button class="film-button">Détails</button>
+            </div>
+        </div>
+    </template>
+    <footer>
+        <p>contact : xxxx@xxxx</p>
+        <p>2024 &copy; JustStreamIt</p>
+    </footer>
+    <script src="js/btn_more.js" defer></script>
+    <!-- <script src="checkbox.js" defer></script> -->
+    <script src="js/modal.js" defer></script>
+    <script src="js/movies.js" defer></script>
+</body>
+</html>

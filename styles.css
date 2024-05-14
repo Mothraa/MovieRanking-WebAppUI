@@ -1,0 +1,422 @@
+/* chargement des polices personnalisées */
+@font-face {
+    font-family: 'police_titre'; /* , 'Police_titre'; */
+    font-weight: 400;
+    font-style: normal;
+    src: url('fonts/Zurich_Extra_Condensed_Bold.otf') format('opentype');
+    /* src: url('fonts/Zurich_Extra_Condensed_Bold.otf') format('opentype'); */
+}
+
+@font-face {
+    font-family: 'police_principale'; /* , 'Police_titre'; */
+    font-weight: 400;
+    font-style: normal;
+    src: url('fonts/BebasNeueBook.woff2') format('woff2');
+    font-display: swap;
+}
+
+/* Styles généraux */
+
+header {
+    color: #fff;
+    background-color: #61787f;
+    border: 1px solid black;
+    display: flex; /* Utilisation de flexbox*/
+    justify-content: left;
+    align-items: center;
+}
+
+header img {
+    width:100px;
+    height: 100%;
+}
+
+body, html {
+    margin: 2vw;
+    padding: 0;
+    font-family:'police_principale', verdana, sans-serif;
+    font-size: 15;
+}
+
+.main_title, h1 {
+    /* margin: 0; */
+    font-size: 2.5em; 
+    text-align: left;
+    font-family: 'police_titre', 'verdana', sans-serif;
+}
+
+h2 {
+    font-size: 1.8em; 
+    text-align: left;
+    font-family: 'police_titre', 'verdana', sans-serif;
+}
+
+.film-best__title h2 {
+    margin-top: 8px;
+    margin-bottom: 0px; /* Réduire la marge en bas du titre */
+}
+
+.film_item h2 {
+    position: absolute;
+    top: 30%; /* Ajustez selon la position verticale souhaitée */
+    left: 20px; /* Ajustez selon la position horizontale souhaitée */
+    margin: 0; /* Ajoutez cette ligne pour supprimer les marges par défaut */
+    color: white; /* Changez la couleur du texte selon vos besoins */
+}
+
+.film-best {
+    border: 4px solid black;
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.film-best__img {
+    flex: 1;
+    margin-right: 20px; /* Marge à droite pour l'espace entre la photo et le titre/description */
+    max-height: fit-content;
+    position: relative;
+}
+
+.film-best__info {
+    flex: 2;
+    position: relative;
+}
+
+.film-best__title {
+    margin-bottom: 5px;  /* a reprendre pour retrecir l'espace */
+}
+
+.film-best__description {
+    margin-top: 5px; /* a reprendre pour retrecir l'espace */
+    flex: 2;
+    display: flex;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* style par défaut du bouton */
+button {
+    color: #fff;
+    font-weight: bold;
+    background-color: #fa0b0b;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+
+}
+
+button:hover {
+    opacity: 0.7
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category_container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: fit-content;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.category_container img {
+    width: auto;
+    object-fit:cover;
+}
+
+.category_container h2 {
+    color: white;
+    z-index: 1;
+
+}
+
+.category_container button {
+    align-content: flex-end;
+    flex-shrink: 0; /* pour que le bouton ne rétrecisse pas. */
+    z-index: 1;
+}
+
+.film_item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    position: relative; /* Positionnement relatif pour les pseudo éléments */
+    display: none; /* masqué par défaut */
+    overflow: hidden;
+}
+
+.show {
+    display: block; /* Afficher les éléments avec la classe 'show' */
+}
+
+.film_item .content {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 100%; /* pour avoir une forme carré */
+}
+
+.film_item .content img {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.film_item::before {
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* met le pseudo-élément au dessus de l'image */
+}
+
+.film-button {
+    align-self: flex-end; /* alignement sur la droite */
+    position: absolute; /* Position absolue pour positionner le bouton par rapport à .item */
+    top: 54%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: white;
+    background-color: rgb(60, 60, 60);
+    padding: 5px 30px;
+}
+
+.btn-see-more_container {
+    z-index: 2;
+    margin-bottom: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-end;
+    margin-top: 20px;
+}
+
+ /* élément modal */
+ .modal {
+    z-index: 3; /* au premier plan */
+    display: none; /* masqué par défaut */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* pour scroller si dépasse */
+    background-color: rgb(0,0,0); /* Fallback color (? a tester) */
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  /* contenu du modal */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  /* bouton de fermeture du motal (croix) */
+  .close-modal-cross {
+    color: red;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  
+  .close-modal-cross:hover,
+  .close-modal-cross:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  } 
+
+/* Media Queries*/
+/* Pour PC */
+@media (min-width: 1024px) {
+    .film_item {
+        flex-basis: calc(33.33% - 20px); /* 3 éléments par ligne */
+        margin: 10px;
+        min-width: 150px;
+        min-height: 150px;
+    }
+    .film-best__img img {
+        width: 100%; /* Faites en sorte que les images occupent toute la largeur */
+        object-fit: contain; /* Pour s'assurer que l'image couvre tout le contenu */
+        max-height: 400px;
+    }
+    /* doublon avec le media query suivant */
+    .film-best__button_container {
+        flex: 3;
+        display: flex;
+        position: relative;
+        flex-direction: column; /*a tester */
+    }
+    .film-best__button {
+        align-self: flex-end;
+        margin-right: 10px; 
+        flex-shrink: 0; /* pour que le bouton ne retrécisse pas. */
+    }
+    .close-modal-cross {
+        display: none;
+    }
+}
+/* pour les tablettes*/
+@media (min-width: 600px) and (max-width: 1023px) {
+    .film_item {
+        flex-basis: calc(50% - 20px); /* 2 éléments par ligne */
+        margin: 10px;
+        min-width: 150px;
+        min-height: 150px;
+        max-width: 330px;
+        max-height: 330px;
+        align-items: center;
+        justify-content: center;
+    }
+    .film-best__img img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .film-best__button_container {
+        flex: 3;
+        display: flex;
+        position: relative;
+        flex-direction: column; /*a tester */
+    }
+    .category_container {
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .film-best__button {
+        align-self: flex-end;
+        margin-right: 10px; 
+        flex-shrink: 0;
+    }
+    .close-modal-btn {
+        display: none;
+    }
+}
+
+/* Pour les smartphones */
+@media (max-width: 600px) {
+    .film_item {
+        flex-basis: calc(100% - 20px); /* 1 élément par ligne */
+        margin: 10px;
+        min-width: 150px;
+        min-height: 150px;
+        max-width: 330px;
+        max-height: 330px;
+        align-items: center;
+        justify-content: center;
+    }
+    .film-best {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .film-best__img img {
+        margin: 10px;
+        width: 100%;
+        min-width: 400px;
+        max-height: 400px;
+        object-fit: cover;
+    }
+    .category_container {
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .film-best__button_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .close-modal-btn {
+        display: none;
+    }
+}
+
+
+
+/* Définition des styles pour le bouton déroulant */
+.select-container {
+    position: relative;
+    max-width: 200px;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid black;
+    color: black;
+    appearance: none; 
+    background-color: white; /* Ajoutez ceci pour s'assurer que l'arrière-plan est blanc */
+    cursor: pointer; /* ne marche pas...*/
+}
+
+/* Styles pour le conteneur de la liste déroulante */
+.select-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background-color: whitesmoke;
+    overflow: hidden;
+    z-index: 5;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+/* Styles pour les options du bouton déroulant */
+.select-container option {
+    background-color: white;
+    color: black;
+}
+
+/* Styles pour l'option survolée */
+.select-container option:hover {
+    background-color: lightgray; /* Changez la couleur de fond de l'option survolée */
+    color: black; /* Changez la couleur du texte de l'option survolée si nécessaire */
+}
+
+/* Styles pour l'option sélectionnée / ne marche que sous chrome*/
+.select-container option:checked {
+    background-color: lightgreen; /* Changez la couleur de fond de l'option sélectionnée */
+    color: black; /* Changez la couleur du texte de l'option sélectionnée */
+    font-weight: bold; /* Optionnel : mettez en gras le texte de l'option sélectionnée */
+}
+
+/* Ajouter une icône à côté de l'option sélectionnée */
+.select-container select option:checked::after {
+    content: "\002705"; /* case cochée verte */
+    margin-left: 5px; /* Ajoute un espace entre le texte et l'icône */
+}
