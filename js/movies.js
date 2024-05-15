@@ -1,4 +1,5 @@
-// Sélection des éléments et des constantes
+// requete pour récupérer la liste des films, et adapte leur affichage en fonction du format (responsive)
+
 const btnSeeMore = document.querySelectorAll('.btn-see-more');
 const categoryContainers = document.querySelectorAll('.category_container');
 const maxItemsTablette = 4;
@@ -6,8 +7,10 @@ const maxItemsSmartphone = 2;
 const maxFilmsShow = 6;
 const category1 = document.querySelector('.categorie_1 .category_container');
 const category2 = document.querySelector('.categorie_2 .category_container');
+const category3 = document.querySelector('.categorie_3 .category_container');
 const urlCategory1 = "http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score";
 const urlCategory2 = "http://localhost:8000/api/v1/titles/?genre=musical&sort_by=-imdb_score";
+const urlCategory3 = "http://localhost:8000/api/v1/titles/?genre=sport&sort_by=-imdb_score";
 const urlGenres = "http://localhost:8000/api/v1/genres/";
 const template = document.querySelector("#film-item-template");
 
@@ -86,37 +89,31 @@ async function loadGenres() {
     });
 
     // Charge la catégorie 3 avec le genre initial
-    loadCategory3(genreSelect.value);
+    loadCategory(genreSelect.value, category3);
 }
 
 // Ecoute l'evenement de redimensionnement de la fenêtre
 window.addEventListener('resize', updateDisplay);
 
-// Mise à jour de l'affichage en fonction de la taille de l'écran
 function updateDisplay() {
-    // récupère la largeur de l'ecran
-    const screenWidth = window.innerWidth;
+  // récupère la largeur de l'écran
+  const screenWidth = window.innerWidth;
 
-    // Nombre max d'elements a afficher en fonction de la taille de l'écran
-    if (screenWidth >= 1024) {
-        categoryContainers.forEach(container => {
-            showItems(container, container.querySelectorAll('.film_item').length);
-            container.nextElementSibling.style.display = 'none';
-        });
-    } else if (screenWidth >= 600 && screenWidth < 1024) {
-        categoryContainers.forEach(container => {
-            showItems(container, maxItemsTablette);
-            container.nextElementSibling.style.display = 'block';
-        });
-    } else {
-        categoryContainers.forEach(container => {
-            showItems(container, maxItemsSmartphone);
-            container.nextElementSibling.style.display = 'block';
-        });
-    }
+  categoryContainers.forEach((container, index) => {
+      let maxItems = screenWidth >= 1024 ? container.querySelectorAll('.film_item').length :
+                     screenWidth >= 600 ? maxItemsTablette :
+                     maxItemsSmartphone;
+
+      showItems(container, maxItems);
+      const totalItems = container.querySelectorAll('.film_item').length;
+      const visibleItems = container.querySelectorAll('.film_item.show').length;
+      const btn = btnSeeMore[index];
+      btn.textContent = visibleItems < totalItems ? "Voir plus" : "Voir moins";
+      btn.style.display = visibleItems < totalItems ? 'block' : 'none'; // cache le bouton si tous les items sont visibles
+  });
 }
 
-// Affichage du nombre d'elements voulu
+// Affichage du nombre d'elements souhaité
 function showItems(container, numItems) {
     const filmItems = container.querySelectorAll('.film_item');
     filmItems.forEach((item, index) => {
@@ -155,19 +152,19 @@ function showMoreItems(container, button) {
     }
 }
 
-// Fonction pour charger les films de la troisième catégorie basée sur le genre sélectionné
-async function loadCategory3(genre) {
-    const container = document.querySelector('.categorie_3 .category_container');
+// Fonction pour charger les films basée sur le genre sélectionné
+async function loadCategory(genre, container) {
+    // const container = document.querySelector('.categorie_3 .category_container');
     const url = `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre=${genre}`;
     container.innerHTML = ''; // Clear previous results
     await loadPage(container, url);
 }
 
 // écouteur d'événement pour la sélection du genre
-const genreSelect = document.getElementById('genre-select');
+const genreSelect = document.getElementById('genre-select');  // a généraliser
 genreSelect.addEventListener('change', () => {
     const selectedGenre = genreSelect.value;
-    loadCategory3(selectedGenre);
+    loadCategory(selectedGenre, category3);
 });
 
 // chargement des films de la page
