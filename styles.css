@@ -53,15 +53,15 @@ h2 {
 
 .film-best__title h2 {
     margin-top: 8px;
-    margin-bottom: 0px; /* Réduire la marge en bas du titre */
+    margin-bottom: 0px;
 }
 
 .film_item h2 {
     position: absolute;
-    top: 30%; /* Ajustez selon la position verticale souhaitée */
-    left: 20px; /* Ajustez selon la position horizontale souhaitée */
-    margin: 0; /* Ajoutez cette ligne pour supprimer les marges par défaut */
-    color: white; /* Changez la couleur du texte selon vos besoins */
+    top: 30%;
+    left: 20px;
+    margin: 0;
+    color: white;
 }
 
 .film-best {
@@ -162,7 +162,7 @@ button:hover {
 }
 
 .show {
-    display: block; /* Afficher les éléments avec la classe 'show' */
+    display: block; /* Affiche les éléments masqués */
 }
 
 .film_item .content {
@@ -264,7 +264,7 @@ button:hover {
         min-height: 150px;
     }
     .film-best__img img {
-        width: 100%; /* Faites en sorte que les images occupent toute la largeur */
+        width: 100%; /* pour que les images occupent toute la largeur */
         object-fit: contain; /* Pour s'assurer que l'image couvre tout le contenu */
         max-height: 400px;
     }
@@ -365,7 +365,6 @@ button:hover {
 }
 
 
-
 /* Définition des styles pour le bouton déroulant */
 .select-container {
     position: relative;
@@ -379,7 +378,7 @@ button:hover {
     border: 1px solid black;
     color: black;
     appearance: none; 
-    background-color: white; /* Ajoutez ceci pour s'assurer que l'arrière-plan est blanc */
+    background-color: white;
     cursor: pointer; /* ne marche pas...*/
 }
 
@@ -404,19 +403,18 @@ button:hover {
 
 /* Styles pour l'option survolée */
 .select-container option:hover {
-    background-color: lightgray; /* Changez la couleur de fond de l'option survolée */
-    color: black; /* Changez la couleur du texte de l'option survolée si nécessaire */
+    background-color: lightgray;
+    color: black;
 }
 
 /* Styles pour l'option sélectionnée / ne marche que sous chrome*/
 .select-container option:checked {
-    background-color: lightgreen; /* Changez la couleur de fond de l'option sélectionnée */
-    color: black; /* Changez la couleur du texte de l'option sélectionnée */
-    font-weight: bold; /* Optionnel : mettez en gras le texte de l'option sélectionnée */
+    background-color: lightgreen;
+    color: black;
+    font-weight: bold;
 }
 
 /* Ajouter une icône à côté de l'option sélectionnée */
 .select-container select option:checked::after {
     content: "\002705"; /* case cochée verte */
-    margin-left: 5px; /* Ajoute un espace entre le texte et l'icône */
 }

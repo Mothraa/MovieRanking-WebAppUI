@@ -58,50 +58,9 @@
 
         </section>
         <section class="categorie_1">
-            <h1>Catégorie 1</h1>
+            <h1>Drama</h1>
             <div class="category_container">
-                <!-- <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test3.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 1</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test1.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 2</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test2.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 3</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test4.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 4</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test2.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 5</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test3.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 6</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div> -->
+            <!-- génération du bloc par template -->
             </div>
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
@@ -109,50 +68,9 @@
         <br>
         </section>
         <section class="categorie_2">
-            <h1>Catégorie 2</h1>
+            <h1>Musical</h1>
             <div class="category_container">
-                <!-- <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test3.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 1</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test1.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 2</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test2.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 3</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test4.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 4</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test2.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 5</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div>
-                <div class="film_item">
-                    <div class="content">
-                        <img src="images/img_test3.jpg" alt="xxxxxx">
-                        <h2>Titre de l'élément 6</h2>
-                        <button class="film_button">Détails</button>
-                    </div>
-                </div> -->
+            <!-- génération du bloc par template -->
             </div>
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
@@ -163,11 +81,46 @@
             <h1>Autres :</h1>
             <div class="select-container">
                 <select id="genre-select">
-                  <option value="action">Films d'action</option>
-                  <option value="comedie">Comédies</option>
-                  <option value="drame">Famille</option>
+                  <!-- Options générées depuis l'API -->
                 </select>
-              </div>      
+            </div> 
+            <div class="category_container">
+            <!-- génération du bloc par template -->
+            </div>
+            <div class="btn-see-more_container">
+                <button class="btn-see-more">Voir plus</button>
+            </div>
+        <br>     
+        </section>
+        <section class="categorie_4">
+            <h1>Autres : Catégorie 4</h1>
+            <div class="select-container">
+                <select id="genre-select">
+                  <!-- Options générées depuis l'API -->
+                </select>
+            </div> 
+            <div class="category_container">
+            <!-- génération du bloc par template -->
+            </div>
+            <div class="btn-see-more_container">
+                <button class="btn-see-more">Voir plus</button>
+            </div>
+        <br>     
+        </section>
+        <section class="categorie_5">
+            <h1>Autres : Catégorie 5</h1>
+            <div class="select-container">
+                <select id="genre-select">
+                  <!-- Options générées depuis l'API -->
+                </select>
+            </div> 
+            <div class="category_container">
+            <!-- génération du bloc par template -->
+            </div>
+            <div class="btn-see-more_container">
+                <button class="btn-see-more">Voir plus</button>
+            </div>
+        <br>     
         </section>
     </main>
     <template id="film-item-template">
@@ -183,7 +136,8 @@
         <p>contact : xxxx@xxxx</p>
         <p>2024 &copy; JustStreamIt</p>
     </footer>
-    <script src="js/btn_more.js" defer></script>
+
+    <!-- <script src="js/btn_more.js" defer></script> -->
     <!-- <script src="checkbox.js" defer></script> -->
     <script src="js/modal.js" defer></script>
     <script src="js/movies.js" defer></script>
