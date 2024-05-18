@@ -16,96 +16,23 @@
             <h1>Meilleur film</h1>
             <section id="best-film">
                 <div class="film-best">
-                    <div class="film-best__img">
-                        <!-- Dynamically loaded best film image -->
+                    <div class="film-best-img">
                         <img src="" alt="photo_best_film" id="best-film-image">
                     </div>
-                    <div class="film-best__info">
-                        <div class="film-best__title">
-                            <!-- Dynamically loaded best film title -->
+                    <div class="film-best-info">
+                        <div class="film-best-title">
                             <h1 id="best-film-title"></h1>
                         </div>
-                        <div class="film-best__description">
-                            <!-- Dynamically loaded best film description -->
+                        <div class="film-best-description">
                             <p id="best-film-description"></p>
                         </div>
-                        <div class="film-best__button_container">
-                            <button class="film-best__button">Détails</button>
-                            <!-- modal du meilleur film -->
-                            <div class="modal">
-                                <div class="modal-content">
-                                    <div class="modal-info">
-                                        <div class="modal-info-left">
-                                            <h1 id="modal-film-title"></h1>
-                                            <p id="modal-film-year-genres"></p>
-                                            <p id="modal-film-category-duration-contries"></p>
-                                            <p id="modal-film-imdb"></p>
-                                            <!-- <br> -->
-                                            <h4>Réalisé par :</h4>
-                                            <p id="modal-film-directors"></p>
-                                        </div>
-                                        <div class="modal-info-right">
-                                            <span class="close-modal-cross">&times;</span>
-                                            <img id="modal-film-image">
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-description">
-                                        <p id="modal-film-description"></p>
-                                    </div>
-                                    <div class="modal-actors">
-                                        <h5>Avec :</h5>
-                                        <p id="modal-film-actors"></p>
-                                    </div>
-                                    <button class="close-modal-btn">Fermer</button>
-                                </div>
-                            </div>
-                            <!-- fin modal du meilleur film -->
+                        <div class="film-best-button-container">
+                            <button class="film-best-button">Détails</button>
                         </div>
+                        <div class="modal-container"></div>
+                        <!-- insertion du modal par JS -->
                     </div>
                 </div>
-            </section>
-            <!-- <div class="film-best">
-                <div class="film-best__img">
-                    <img src="images/img_test4.jpg" alt="photo_best_film">
-                </div>
-                <div class="film-best__info">
-                    <div class="film-best__title">
-                        <h2>The Big Lebowski</h2>
-                    </div>
-                    <div class="film-best__description">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        </p>
-                    </div>
-                    <div class="film-best__button_container">
-                        <button class="film-best__button">Détails</button>
-                        <div class="modal">
-                            <div class="modal-content">
-                                <span class="close-modal-cross">&times;</span>
-                                <div class="modal-info">
-                                    <div class="modal-info__title">
-                                        <h3>The Big Lebowski</h3>
-                                        <p>1998</p>
-                                        <p>Réalisé par : Joel Cohen, Ethan Cohen</p>
-                                    </div>
-                                    <div class="modal-info__image">
-                                        <img src="images/img_test4.jpg" alt="photo_best_film">
-                                    </div>
-                                </div>
-                                <div class="modal-description">
-                                    <p>Blablabla...Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-                                <div class="modal-actors">
-                                    <h4>Avec :</h4>
-                                    <p>Jeff Bridges</p>
-                                <button class="close-modal-btn">Fermer</button>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div> -->
-
         </section>
         <section class="categorie_1">
             <h1>Drama</h1>
@@ -115,7 +42,6 @@
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
             </div>
-        <br>
         </section>
         <section class="categorie_2">
             <h1>Musical</h1>
@@ -125,7 +51,6 @@
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
             </div>
-        <br>
         </section>
         <section class="categorie_3">
             <h1>Sport</h1>
@@ -134,15 +59,16 @@
             </div>
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
-            </div>
-        <br>     
+            </div>    
         </section>
         <section class="categorie_4">
-            <h1>Autres :</h1>
-            <div class="select-container">
-                <select id="genre-select-cat4">
-                  <!-- Options générées depuis l'API -->
-                </select>
+            <div class="category-selection">
+                <h1>Autres :</h1>
+                <div class="select-container">
+                    <select id="genre-select-cat4">
+                      <!-- Options générées depuis l'API -->
+                    </select>
+                </div>
             </div>
             <div class="category_container">
             <!-- génération du bloc par template -->
@@ -150,22 +76,22 @@
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
             </div>
-        <br>     
         </section>
         <section class="categorie_5">
-            <h1>Autres :</h1>
-            <div class="select-container">
-                <select id="genre-select-cat5">
-                  <!-- Options générées depuis l'API -->
-                </select>
-            </div> 
+            <div class="category-selection">
+                <h1>Autres :</h1>
+                <div class="select-container">
+                    <select id="genre-select-cat5">
+                      <!-- Options générées depuis l'API -->
+                    </select>
+                </div>
+            </div>
             <div class="category_container">
             <!-- génération du bloc par template -->
             </div>
             <div class="btn-see-more_container">
                 <button class="btn-see-more">Voir plus</button>
             </div>
-        <br>     
         </section>
     </main>
     <template id="film-item-template">
@@ -174,44 +100,44 @@
                 <img class="film-img">
                 <h2 class="film-title"></h2>
                 <button class="film-button">Détails</button>
+                <div class="modal-container"></div>
+                <!-- insertion du modal "film-modal-template" -->
             </div>
+
         </div>
     </template>
-    <template id="modal-template">
-
-        <!-- <div class="modal-content">
-            <div class="modal-info">
-                <div class="modal-text">
-                    <h3 id="modal-film-title"></h3>
-                    <p id="modal-film-year"></p>
-                    <p id="modal-film-genres"></p>
-                    <p id="modal-film-spectator-category"></p>
-                    <p id="modal-film-duration"></p>
-                    <p id="modal-film-countries"></p>
-                    <p id="modal-film-imdb"></p>
-                    <p id="modal-film-directors"></p>
+    <template id="film-modal-template">
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-modal-cross">&times;</span>
+                <div class="modal-info">
+                    <div class="modal-info-left">
+                        <h1 class="modal-film-title"></h1>
+                        <p class="modal-film-year-genres"></p>
+                        <p class="modal-film-category-duration-countries"></p>
+                        <p class="modal-film-imdb"></p>
+                        <h4>Réalisé par : <span class="modal-film-directors"></span></h4>
+                    </div>
+                    <div class="modal-info-right">
+                        <img class="modal-film-image">
+                    </div>
                 </div>
-                <div class="modal-image"></div>
+                <div class="modal-description">
+                    <p class="modal-film-description"></p>
+                </div>
+                <div class="modal-actors">
+                    <h5>Avec :</h5>
+                    <p class="modal-film-actors"></p>
+                </div>
+                <button class="close-modal-btn">Fermer</button>
             </div>
-            <span class="close-modal-cross">&times;</span>
-            <div class="modal-description">
-                <p id="modal-film-description">Description du film</p>
-            </div>
-            <div class="modal-actors">
-                <h4>Avec :</h4>
-                <p id="modal-film-actors">Liste d'acteurs</p>
-            </div>
-            <button class="close-modal-btn">Fermer</button>
-        </div> -->
+        </div>
     </template>
     <footer>
         <p>contact : xxxx@xxxx</p>
         <p>2024 &copy; JustStreamIt</p>
     </footer>
-
-    <!-- <script src="js/btn_more.js" defer></script> -->
-    <!-- <script src="checkbox.js" defer></script> -->
-    <script src="js/modal.js" defer></script>
+    <!-- <script src="js/modal.js" defer></script> -->
     <script src="js/movies.js" defer></script>
 </body>
 </html>
