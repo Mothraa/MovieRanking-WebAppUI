@@ -56,11 +56,6 @@ h5 {
     margin-bottom: 0px;
 }
 
-/* .film-best__title h2 {
-    margin-top: 8px;
-    margin-bottom: 0px;
-} */
-
 .film_item h2 {
     position: absolute;
     top: 30%;
@@ -71,9 +66,6 @@ h5 {
 
 .film-best {
     border: 4px solid black;
-    /* padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px; */
     padding: 10px;
     flex: 1;
     display: flex;
@@ -265,7 +257,7 @@ button:hover {
 }
 
 .btn-see-more_container {
-    z-index: 2;
+    z-index: 3;
     margin-bottom: 20px;
     display: flex;
     text-align: center;
@@ -286,14 +278,15 @@ button:hover {
 
  /* élément modal */
  .modal {
-    z-index: 3;
+    z-index: 4;
     display: none; /* Masqué par défaut, affiché par script JS */
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -315,8 +308,7 @@ button:hover {
 }
 
 .modal-info-left, .modal-info-right {
-    flex: auto; /* Chaque section prend une part égale */
-    /* margin: 20px; */
+    flex: auto;
 }
 
 .modal-info-left {
@@ -344,8 +336,8 @@ button:hover {
     font-weight: 300;
 }
 
-.modal-film-category-duration-countries {
-    margin:0px;
+.modal-film-directors {
+    margin-top: 0px;
 }
 
 .modal-film-title {
@@ -353,9 +345,9 @@ button:hover {
     margin-bottom: 0px;
 }
 
-.modal-film-year-genres, .modal-film-category-duration-contries, .modal-film-imdb {
- margin-top: 0px;
- margin-bottom: 0px;
+.modal-film-year-genres, .modal-film-category-duration-countries, .modal-film-imdb {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .modal-film-actors {
@@ -363,6 +355,7 @@ button:hover {
     text-align: left;
     font-weight: 300;
 }
+
 .modal-description, .modal-actors {
     margin-top: 5px;
     padding-left: 20px;
@@ -377,11 +370,7 @@ button:hover {
     text-align: left;
 }
 
-.modal-film-directors {
-    margin-top: 0px;
-}
-
-.modal-film-actors {
+.modal-film-directors .modal-film-actors .modal-film-category-duration-countries {
     margin-top: 0px;
 }
 
@@ -417,7 +406,7 @@ cursor: pointer;
 
 .select-container select {
     font-family: 'Oswald', Verdana, sans-serif;
-    width: 400px;
+    width: auto;
     font-size: 36px;
     font-weight: 600;
     color: black;
@@ -491,19 +480,18 @@ cursor: pointer;
         min-width:250px;
     }
 
-    /* .film-best-button-container {
-        flex: 3;
-        display: flex;
-        position: relative;
-        justify-content: flex-end;
-    } */
-
     .category_container {
         align-items: center;
         justify-content: center;
         margin-left: auto;
         margin-right: auto;
     }
+
+    .category_container img {
+        min-width: 300px;
+        object-fit: cover;
+    }
+
     .film-best-button {
         align-self: flex-end;
         margin-right: 10px; 
@@ -557,22 +545,26 @@ cursor: pointer;
         padding-right: 20px;
         padding-bottom: 10px;
     }
+
     .film-best-img {
         margin: 0px;
 
     }
+
     .film-best-img img {
         width: 100%;
         min-width: 250px;
         max-height: 350px;
         object-fit: cover;
     }
+
     .category_container {
         align-items: center;
         justify-content: center;
         margin-left: auto;
         margin-right: auto;
     }
+
     .film-best-button-container {
         display: flex;
         align-items: center;
@@ -580,32 +572,47 @@ cursor: pointer;
         padding-top: 20px;
         padding-right: 0px;
     }
+
+    .select-container {
+        margin: auto;
+    }
+
+    .modal {
+        margin-left: 12px;
+        margin-right: 12px;
+        width: auto;
+    }
+
     .modal-info {
         flex-direction: column;
     }
+
     .modal-info-left, .modal-info-right {
         margin: 0 0 10px 0;
         width: 100%;
-        overflow:auto;
+        /* overflow: auto; */
     }
+
     .modal-info-left, .modal-description, .modal-actors {
         padding-left: 0px;
     }
+
     .modal-info-right {
         display: flex;
         justify-content: center;
         align-items: center;
         object-fit: cover;
     }
+
+    .category_container img {
+        min-width: 300px;
+        object-fit: cover;
+    }
+
     .close-modal-btn {
         display: none;
     }
-    /* .modal-film-image img {
-        padding-left: 20;
-        padding-right: 20;
-        width: 100%;
-        height: auto;
-    } */
+
     .modal-content {
         width: 100%;
         padding: 5px;

@@ -144,7 +144,7 @@ async function fetchBestFilm(mainUrl, modal) {
         const filmDetails = await detailsResponse.json();
 
         // MAJ du modal avec les détails du film
-        console.log(modal);
+        // console.log(modal);
         modalInfos(modal, filmDetails);
         return filmDetails;
     } catch (error) {
@@ -216,24 +216,13 @@ async function bestFilm(urlBestFilm) {
     const modalTemplate = document.getElementById('film-modal-template').content.cloneNode(true);
     // Ajouter un identifiant ou une classe unique au modal
     const modal = modalTemplate.firstElementChild; // Supposons que le modal est le premier élément enfant du template cloné
-    //modalElement.classList.add('best-film-modal'); // Ajout d'une classe pour identification facile
 
     filmBestInfo.appendChild(modal);
 
-    //const modal = document.querySelector('.best-film-modal');
-    //console.log(modal);
     // TODO récupérer le modal du best film et le passer en paramètre de fetchBestFilm
 
     try {
-        // const response = await fetch(filmDetails.url);
         const filmDetails = await fetchBestFilm(urlBestFilm, modal);
-        console.log(filmDetails);
-        console.log("dans la boucle film details");
-        // response = await fetchBestFilm(urlBestFilm, modal);
-        // if (!response.ok) {
-        //     throw new Error(`Erreur : ${response.status}`);
-        // }
-        // const bestFilmDetails = await response.json();
         const filmImage = document.getElementById('best-film-image');
         filmImage.src = filmDetails.image_url;
         filmImage.alt = `Affiche ${filmDetails.title}`;
@@ -260,7 +249,7 @@ function displayFilm(filmData, container){
     filmTitle.textContent = filmData.title;
     filmImg.src = filmData.image_url;
     filmItem.dataset.filmId = filmData.id; // Stocker l'ID du film
-    filmItem.dataset.url = filmData.url
+    filmItem.dataset.url = filmData.url; // Stocker l'URL du film
     filmImg.onerror = function() {
         this.src = "images/image_non_dispo.jpg";
         this.alt = "Image non disponible";
@@ -288,7 +277,7 @@ async function fetchFilmListByCategory(container, url) {
                     filmsLoaded++;
                 }
             });
-            if (!films.next) break; // Sortir de la boucle si aucune autre page
+            if (!films.next) break; // break si aucune autre page
             currentPage++;
         } catch (error) {
             console.error('Erreur : ', error);
@@ -336,13 +325,6 @@ function showItems(container, numItems) {
         }
     });
 }
-
-btnSeeMore.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        const container = categoryContainers[index];
-        showMoreItems(container, button);
-    });
-});
 
 function showMoreItems(container, button) {
     const currentVisibleItems = container.querySelectorAll('.film_item.show').length;
@@ -421,39 +403,26 @@ function initializeFilmModalEvents() {
                 }
             }
         }
-        setupModalEvents(); // on actualise le comportement des nouveaux modals
+        setupEvents(); // on actualise le comportement des nouveaux modals
     });
 }
 
-function setupModalEvents() {
-
+function setupEvents() {
     // on récupère le modal
     const modals = document.querySelectorAll(".modal");//, ".film-best .modal");
-    // console.log(modals);
     // boutons qui ouvrent le modal
-    // const btns = document.querySelectorAll(".film-best__button");
-    const btns = document.querySelectorAll(".film-button, .film-best-button"); // + autres boutons détails
-
-    // pour le bouton best film, a regrouper avec les autres
-    // const detailButton = document.querySelector('.film-best-button');
-    // const closeModal = modal.querySelector('.close-modal-cross');
-
+    const btns = document.querySelectorAll(".film-button, .film-best-button");
     // boutons qui ferment le modal
     const closeModalCrosses = document.querySelectorAll('.close-modal-cross');
     const closeModalButtons = document.querySelectorAll('.close-modal-btn');
 
     btns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Trouver le modal le plus proche en fonction du contexte du bouton cliqué
+            // trouve le modal le plus proche en fonction du contexte du bouton cliqué
             let modal;
             if (this.classList.contains('film-best-button')) {
-                console.log("dans la boucle");
                 // Si c'est un bouton dans la section du meilleur film
-                // modal = this.closest('.film-best-button-container').querySelector('.modal-container .modal');
-                console.log(this.closest('.film-best-info'));
                 modal = this.closest('.film-best-info').querySelector('.modal-container .modal');
-
-                // console.log(modal);
             } else {
                 // Pour les autres boutons
                 modal = this.closest('.content').querySelector('.modal-container .modal');
@@ -464,20 +433,20 @@ function setupModalEvents() {
         });
     });
 
-    // fermeture du modal
+    // fermeture du modal avec la croix
     closeModalCrosses.forEach(cross => {
         cross.addEventListener('click', function() {
             const modal = this.closest('.modal');
             modal.style.display = 'none';
         });
     });
+    // fermeture du modal avec le bouton
     closeModalButtons.forEach(button => {
         button.addEventListener('click', function() {
             const modal = this.closest('.modal');
             modal.style.display = 'none';
         });
     });
-
     // fermeture du modal si click a l'extérieur
     window.addEventListener('click', (event) => {
         modals.forEach(modal => {
@@ -498,7 +467,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateListSelection();
     insertDetailsModal();
     initializeFilmModalEvents();
-    setupModalEvents();
+
 });
 
 window.addEventListener('resize', updateDisplay);
@@ -516,6 +485,13 @@ genreSelectCat5.addEventListener('change', () => {
     loadCategory(selectedGenre, category5);
 });
 
+btnSeeMore.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        const container = categoryContainers[index];
+        showMoreItems(container, button);
+    });
+});
 
+setupEvents();
 
 updateDisplay();
