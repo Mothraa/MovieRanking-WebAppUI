@@ -88,7 +88,6 @@ function modalInfos(modal, filmData) {
 
     const modalDescription = modal.querySelector('.modal-film-description');
     modalDescription.textContent = filmData.long_description;
-
     const modalActors = modal.querySelector('.modal-film-actors');
     modalActors.textContent = filmData.actors ? filmData.actors.join(', ') : "N/A";
 }
@@ -129,7 +128,7 @@ function modalInfos(modal, filmData) {
 
 async function fetchBestFilm(mainUrl, modal) {
     try {
-        // Étape 1: Récupérer le meilleur film
+        // récupération du meilleur film
         const bestFilmResponse = await fetch(mainUrl);
         if (!bestFilmResponse.ok) {
             throw new Error(`Erreur lors de la récupération des films : ${bestFilmResponse.status}`);
@@ -137,15 +136,17 @@ async function fetchBestFilm(mainUrl, modal) {
         const films = await bestFilmResponse.json();
         const bestFilmUrl = films.results[0].url;
 
-        // Étape 2: Récupérer les détails du meilleur film
+        // récupération des détails du meilleur film
         const detailsResponse = await fetch(bestFilmUrl);
         if (!detailsResponse.ok) {
             throw new Error(`Erreur lors de la récupération des détails du film : ${detailsResponse.status}`);
         }
         const filmDetails = await detailsResponse.json();
 
-        // Étape 3: Mettre à jour le modal avec les détails du film
+        // MAJ du modal avec les détails du film
+        console.log(modal);
         modalInfos(modal, filmDetails);
+        return filmDetails;
     } catch (error) {
         console.error('Erreur : ', error);
     }
@@ -165,7 +166,7 @@ async function fetchFilmDetails(filmUrl, modal) {
 }
 
 // chargement de la liste des genres
-async function loadGenres() {
+async function fetchGenres() {
     let url = urlGenres;
     let defaultGenreCat4 = "Crime";
     let defaultGenreCat5 = "Family";
@@ -211,34 +212,63 @@ async function loadGenres() {
   
 async function bestFilm(urlBestFilm) {
     // chargement du modal best film
-    const filmBestInfo = document.querySelector('.film-best-info');
+    const filmBestInfo = document.querySelector('.film-best-info .modal-container');
     const modalTemplate = document.getElementById('film-modal-template').content.cloneNode(true);
-    filmBestInfo.appendChild(modalTemplate);
-        
-    const urlDetails = await fetchBestFilm(urlBestFilm);
+    // Ajouter un identifiant ou une classe unique au modal
+    const modal = modalTemplate.firstElementChild; // Supposons que le modal est le premier élément enfant du template cloné
+    //modalElement.classList.add('best-film-modal'); // Ajout d'une classe pour identification facile
+
+    filmBestInfo.appendChild(modal);
+
+    //const modal = document.querySelector('.best-film-modal');
+    //console.log(modal);
+    // TODO récupérer le modal du best film et le passer en paramètre de fetchBestFilm
+
     try {
-    const response = await fetch(urlDetails);
-    if (!response.ok) {
-        throw new Error(`Erreur : ${response.status}`);
+        // const response = await fetch(filmDetails.url);
+        const filmDetails = await fetchBestFilm(urlBestFilm, modal);
+        console.log(filmDetails);
+        console.log("dans la boucle film details");
+        // response = await fetchBestFilm(urlBestFilm, modal);
+        // if (!response.ok) {
+        //     throw new Error(`Erreur : ${response.status}`);
+        // }
+        // const bestFilmDetails = await response.json();
+        const filmImage = document.getElementById('best-film-image');
+        filmImage.src = filmDetails.image_url;
+        filmImage.alt = `Affiche ${filmDetails.title}`;
+        // console.log(filmImage);
+        const filmTitle = document.getElementById('best-film-title');
+        // console.log(filmTitle);
+        filmTitle.textContent = filmDetails.title;
+
+        const filmDescription = document.getElementById('best-film-description');
+        filmDescription.textContent = filmDetails.long_description;
+    } catch (error) {
+        console.error('Erreur : ', error);
     }
-    const bestFilmDetails = await response.json();
-    const filmImage = document.getElementById('best-film-image');
-    filmImage.src = bestFilmDetails.image_url;
-    filmImage.alt = `Affiche ${bestFilmDetails.title}`;
-    // console.log(filmImage);
-    const filmTitle = document.getElementById('best-film-title');
-    // console.log(filmTitle);
-    filmTitle.textContent = bestFilmDetails.title;
-
-    const filmDescription = document.getElementById('best-film-description');
-    filmDescription.textContent = bestFilmDetails.long_description;
-
-  } catch (error) {
-    console.error('Erreur : ', error);
-  }
 }
 
-async function loadPage(container, url) {
+function displayFilm(filmData, container){
+    // clone le template + peuple les infos de base + et stock ID+url pour futur chargement modal
+    const template = document.getElementById('film-item-template');
+    const clone = document.importNode(template.content, true);
+    const filmTitle = clone.querySelector(".film-title");
+    const filmImg = clone.querySelector(".film-img");
+    const filmItem = clone.querySelector(".film_item");
+
+    filmTitle.textContent = filmData.title;
+    filmImg.src = filmData.image_url;
+    filmItem.dataset.filmId = filmData.id; // Stocker l'ID du film
+    filmItem.dataset.url = filmData.url
+    filmImg.onerror = function() {
+        this.src = "images/image_non_dispo.jpg";
+        this.alt = "Image non disponible";
+    };
+    container.appendChild(clone);
+}
+
+async function fetchFilmListByCategory(container, url) {
     let currentPage = 1;
     let filmsLoaded = 0;
 
@@ -252,23 +282,9 @@ async function loadPage(container, url) {
             }
             const films = await response.json();
 
-            films.results.forEach(film => {
+            films.results.forEach(filmData => {
                 if (filmsLoaded < maxFilmsShow) {
-                    const clone = document.importNode(template.content, true);
-                    const filmTitle = clone.querySelector(".film-title");
-                    const filmImg = clone.querySelector(".film-img");
-                    const filmItem = clone.querySelector(".film_item");
-
-                    filmTitle.textContent = film.title;
-                    filmImg.src = film.image_url;
-                    filmItem.dataset.filmId = film.id; // Stocker l'ID du film
-                    filmItem.dataset.url = film.url
-                    // console.log(filmItem.dataset);
-                    filmImg.onerror = function() {
-                        this.src = "images/image_non_dispo.jpg";
-                        this.alt = "Image non disponible";
-                    };
-                    container.appendChild(clone);
+                    displayFilm(filmData, container);
                     filmsLoaded++;
                 }
             });
@@ -289,10 +305,8 @@ async function loadPage(container, url) {
     }
 
     updateDisplay();
-    insertDetailsModal(); // Réinitialiser les événements après le chargement du contenu
+    insertDetailsModal(container); // Réinitialiser les événements après le chargement du contenu
 }
-
-
 
 function updateDisplay() {
     // récupère la largeur de l'écran
@@ -349,7 +363,7 @@ function showMoreItems(container, button) {
 async function loadCategory(genre, container) {
     const url = `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&genre=${genre}`; // mettre dans variable
     container.innerHTML = '';
-    await loadPage(container, url);
+    await fetchFilmListByCategory(container, url);
 }
 
 function updateListSelection(){
@@ -382,7 +396,7 @@ function updateListSelection(){
 }
 
 function insertDetailsModal() {
-    const filmItems = document.querySelectorAll('.film_item');
+    const filmItems = document.querySelectorAll('.film_item', '.film-best');
     const modalTemplate = document.getElementById('film-modal-template').content;
 
     filmItems.forEach(item => {
@@ -411,33 +425,18 @@ function initializeFilmModalEvents() {
     });
 }
 
-
 function setupModalEvents() {
-    // pour le bouton best film, a regrouper avec les autres
-    const detailButton = document.querySelector('.film-best-button');
-    const modal = document.querySelector('.film-best .modal'); // Assurez-vous que le sélecteur cible le bon modal
-    const closeModal = modal.querySelector('.close-modal-cross');
-
-    detailButton.onclick = function() {
-        modal.style.display = "block";
-    };
-
-    closeModal.onclick = function() {
-        modal.style.display = "none";
-    };
-
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
 
     // on récupère le modal
-    const modals = document.querySelectorAll(".modal");
-
+    const modals = document.querySelectorAll(".modal");//, ".film-best .modal");
+    // console.log(modals);
     // boutons qui ouvrent le modal
     // const btns = document.querySelectorAll(".film-best__button");
     const btns = document.querySelectorAll(".film-button, .film-best-button"); // + autres boutons détails
+
+    // pour le bouton best film, a regrouper avec les autres
+    // const detailButton = document.querySelector('.film-best-button');
+    // const closeModal = modal.querySelector('.close-modal-cross');
 
     // boutons qui ferment le modal
     const closeModalCrosses = document.querySelectorAll('.close-modal-cross');
@@ -448,10 +447,15 @@ function setupModalEvents() {
             // Trouver le modal le plus proche en fonction du contexte du bouton cliqué
             let modal;
             if (this.classList.contains('film-best-button')) {
+                console.log("dans la boucle");
                 // Si c'est un bouton dans la section du meilleur film
+                // modal = this.closest('.film-best-button-container').querySelector('.modal-container .modal');
+                console.log(this.closest('.film-best-info'));
                 modal = this.closest('.film-best-info').querySelector('.modal-container .modal');
+
+                // console.log(modal);
             } else {
-                // Pour les autres boutons, supposons que le modal est plus proche dans une structure similaire
+                // Pour les autres boutons
                 modal = this.closest('.content').querySelector('.modal-container .modal');
             }
             if (modal) {
@@ -486,10 +490,10 @@ function setupModalEvents() {
 
 document.addEventListener("DOMContentLoaded", async () => {
     await bestFilm(urlBestFilm);
-    await loadPage(category1, urlCategory1);
-    await loadPage(category2, urlCategory2);
-    await loadPage(category3, urlCategory3);
-    await loadGenres(); // categories 4 et 5
+    await fetchFilmListByCategory(category1, urlCategory1);
+    await fetchFilmListByCategory(category2, urlCategory2);
+    await fetchFilmListByCategory(category3, urlCategory3);
+    await fetchGenres(); // categories 4 et 5
 
     updateListSelection();
     insertDetailsModal();

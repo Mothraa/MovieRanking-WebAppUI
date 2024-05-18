@@ -98,7 +98,18 @@ h5 {
 }
 
 #best-film-title {
-    margin:0px;
+    margin:20px;
+}
+
+.film-best-button {
+    margin:20px;
+}
+
+.film-best-button-container {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    padding-right: 20px;
 }
 
 .film-best-description {
@@ -106,7 +117,9 @@ h5 {
     flex: 2;
     display: flex;
 }
-
+#best-film-description {
+    margin:20px;
+}
 footer {
     background-color: #61787f;
     color: #fff;
@@ -437,14 +450,15 @@ cursor: pointer;
         width: 100%; /* pour que les images occupent toute la largeur */
         object-fit: cover; /* Pour s'assurer que l'image couvre tout le contenu */
         /* max-height: 400px; */
+        min-width:250px;
     }
     /* doublon avec le media query suivant */
-    .film-best-button-containe {
+    /* .film-best-button-container {
         flex: 3;
         display: flex;
         position: relative;
-        flex-direction: column; /*a tester */
-    }
+        flex-direction: column;
+    } */
     .film-best-button {
         align-self: flex-end;
         margin-right: 10px; 
@@ -474,14 +488,15 @@ cursor: pointer;
     .film-best-img img {
         width: 100%;
         object-fit: cover;
+        min-width:250px;
     }
 
-    .film-best-button-container {
+    /* .film-best-button-container {
         flex: 3;
         display: flex;
         position: relative;
-        flex-direction: column; /*a tester */
-    }
+        justify-content: flex-end;
+    } */
 
     .category_container {
         align-items: center;
@@ -548,7 +563,7 @@ cursor: pointer;
     }
     .film-best-img img {
         width: 100%;
-        min-width: 350px;
+        min-width: 250px;
         max-height: 350px;
         object-fit: cover;
     }
@@ -562,6 +577,8 @@ cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-top: 20px;
+        padding-right: 0px;
     }
     .modal-info {
         flex-direction: column;
@@ -604,4 +621,8 @@ cursor: pointer;
     .category-selection h1 {
         display: none;
     }
+    
+    #best-film-title, #best-film-description, .film-best-button {
+        margin:0px;
+}
 }
