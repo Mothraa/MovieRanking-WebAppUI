@@ -26,19 +26,19 @@ body, html {
 }
 
 .main_title {
-    font-size: 40px; /*2.5em;*/
+    font-size: 40px;
     text-align: left;
     font-weight: 300;
 }
 
 h1 {
-    font-size: 48px; /*2.5em;*/
+    font-size: 48px;
     text-align: left;
     font-weight: 600;
 }
 
 h2 {
-    font-size: 24px; /*1.8em;*/
+    font-size: 24px;
     text-align: left;
     font-weight: 600;
 }
@@ -129,7 +129,6 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 15px;
-
 }
 
 .film-best-button {
@@ -288,10 +287,6 @@ button:hover {
     overflow-x: hidden;
     overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.4);
-
-    /* display: flex; */
-
-    /* max-width: 1000px;  */
 }
 
 
@@ -299,7 +294,6 @@ button:hover {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
     background-color: #fefefe;
     margin: 3% auto 3%;;
     padding: 20px;
@@ -310,21 +304,6 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
-/* .modal-content {
-    width: 100%;
-    padding: 5px;
-
-} */
-/* .modal-info {
-    display: flex;
-    flex-direction: row;
-    
-} */
-/* 
-.modal-info-left, .modal-info-right {
-    flex: auto;
-} */
-
 
 .modal-info-left {
     order: 1;
@@ -388,14 +367,9 @@ button:hover {
 .modal-description, .modal-actors {
     margin-top: 5px;
     padding-left: 20px;
-    /* background-color: lightcoral; */
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center; */
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    /* width: 100%; */
     text-align: left;
 }
 
@@ -471,24 +445,17 @@ fleche vers le haut \0025B2 */
 /* Pour PC */
 @media (min-width: 1024px) {
     .film_item {
-        flex-basis: calc(33.33% - 20px); /* 3 éléments par ligne */
+        flex-basis: calc(33.33% - 20px);
         margin: 10px;
         min-width: 150px;
         min-height: 150px;
     }
     .film-best-img img {
-        width: 100%; /* pour que les images occupent toute la largeur */
-        object-fit: cover; /* Pour s'assurer que l'image couvre tout le contenu */
-        /* max-height: 400px; */
+        width: 100%;
+        object-fit: cover;
         min-width:250px;
     }
-    /* doublon avec le media query suivant */
-    /* .film-best-close-modal-btn-container {
-        flex: 3;
-        display: flex;
-        position: relative;
-        flex-direction: column;
-    } */
+
     .film-best-button {
         align-self: flex-end;
         margin-right: 10px; 
@@ -506,7 +473,7 @@ fleche vers le haut \0025B2 */
 /* pour les tablettes*/
 @media (min-width: 600px) and (max-width: 1023px) {
     .film_item {
-        flex-basis: calc(50% - 20px); /* 2 éléments par ligne */
+        flex-basis: calc(50% - 20px);
         margin: 10px;
         min-width: 150px;
         min-height: 150px;
@@ -538,22 +505,7 @@ fleche vers le haut \0025B2 */
         margin-right: 10px; 
         flex-shrink: 0;
     }
-    /* .modal-info {
-        flex-direction: column;
-    }
-    .modal-info-left, .modal-info-right {
-        margin: 0 0 10px 0;
-        width: 100%;
-    }
-    .modal-info-left, .modal-description, .modal-actors {
-        padding-left: 0px;
-    }
-    .modal-info-right {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        object-fit: cover;
-    } */
+
     .modal-info-right {
         order: 3;
     }
@@ -579,7 +531,7 @@ fleche vers le haut \0025B2 */
 /* Pour les smartphones */
 @media (max-width: 600px) {
     .film_item {
-        flex-basis: calc(100% - 20px); /* 1 élément par ligne */
+        flex-basis: calc(100% - 20px);
         margin: 10px;
         min-width: 150px;
         min-height: 150px;
@@ -602,7 +554,6 @@ fleche vers le haut \0025B2 */
 
     .film-best-img {
         margin: 0px;
-
     }
 
     .film-best-img img {
@@ -636,25 +587,11 @@ fleche vers le haut \0025B2 */
         margin-right: 12px;
         width: auto;
     }
-/* 
-    .modal-info {
-        flex-direction: column;
-    }
-*/
+
     .modal-info-left {
         padding-left: 0px;
     }
-    /*
-    .modal-info-left, .modal-description, .modal-actors {
-        padding-left: 0px;
-    }
-    
-    .modal-info-right {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        object-fit: cover;
-    } */
+
     .modal-info-right {
         order: 3;
         justify-content: center;
