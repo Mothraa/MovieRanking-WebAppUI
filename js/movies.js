@@ -157,7 +157,7 @@ function displayFilm(filmData, container){
     const clone = document.importNode(template.content, true);
     const filmTitle = clone.querySelector(".film-title");
     const filmImg = clone.querySelector(".film-img");
-    const filmItem = clone.querySelector(".film_item");
+    const filmItem = clone.querySelector(".film-item");
 
     filmTitle.textContent = filmData.title;
     filmImg.src = filmData.image_url;
@@ -200,7 +200,7 @@ async function fetchFilmListByCategory(container, url) {
 
     while (filmsLoaded < maxFilmsShow) {
         const emptyItem = document.createElement("div");
-        emptyItem.className = "film_item empty";
+        emptyItem.className = "film-item empty";
         emptyItem.innerHTML = "<div class='empty-content'>Contenu non disponible</div>";
         container.appendChild(emptyItem);
         filmsLoaded++;
@@ -216,13 +216,13 @@ function updateDisplay() {
     const screenWidth = window.innerWidth;
   
     categoryContainers.forEach((container, index) => {
-        let maxItems = screenWidth >= 1024 ? container.querySelectorAll('.film_item').length :
+        let maxItems = screenWidth >= 1024 ? container.querySelectorAll('.film-item').length :
                        screenWidth >= 600 ? maxItemsTablette :
                        maxItemsSmartphone;
   
         showItems(container, maxItems);
-        const totalItems = container.querySelectorAll('.film_item').length;
-        const visibleItems = container.querySelectorAll('.film_item.show').length;
+        const totalItems = container.querySelectorAll('.film-item').length;
+        const visibleItems = container.querySelectorAll('.film-item.show').length;
         const btn = btnSeeMore[index];
         btn.textContent = visibleItems < totalItems ? "Voir plus" : "Voir moins";
         btn.style.display = visibleItems < totalItems ? 'block' : 'none'; // cache le bouton si tous les items sont visibles
@@ -230,7 +230,7 @@ function updateDisplay() {
   }
 
 function showItems(container, numItems) {
-    const filmItems = container.querySelectorAll('.film_item');
+    const filmItems = container.querySelectorAll('.film-item');
     filmItems.forEach((item, index) => {
         if (index < numItems) {
             item.classList.add('show');
@@ -241,8 +241,8 @@ function showItems(container, numItems) {
 }
 
 function showMoreItems(container, button) {
-    const currentVisibleItems = container.querySelectorAll('.film_item.show').length;
-    const totalItems = container.querySelectorAll('.film_item').length;
+    const currentVisibleItems = container.querySelectorAll('.film-item.show').length;
+    const totalItems = container.querySelectorAll('.film-item').length;
     if (currentVisibleItems < totalItems) {
         showItems(container, totalItems);
         button.textContent = "Voir moins";
@@ -276,36 +276,51 @@ function updateListSelection(){
             const selectedOption = this.options[this.selectedIndex];
             selectedOption.text = selectedOption.getAttribute('data-original-text') + " \u2705";
         });
-
-        select.addEventListener('blur', function() {
+        // select.addEventListener('blur', function() {
+        //     Array.from(this.options).forEach(option => {
+        //         option.text = option.getAttribute('data-original-text');
+        //         if (option.value === e.currentTarget.value)
+        //             option.text = option.getAttribute('data-original-text') + " \u25BC";
+        //     });
+        // });
+        // select.addEventListener('select', function(e) {
+        //     console.log(e.currentTarget.value);
+        //     Array.from(this.options).forEach(option => {
+        //         option.text = option.getAttribute('data-original-text');
+        //         if (option.value === e.currentTarget.value)
+        //             option.text = option.getAttribute('data-original-text') + " \u25BC";
+        //     });
+        // });
+        select.addEventListener('select', function() {
             Array.from(this.options).forEach(option => {
                 option.text = option.getAttribute('data-original-text');
-            });
-        });
-
-        select.addEventListener('change', function() {
-            Array.from(this.options).forEach(option => {
-                option.text = option.getAttribute('data-original-text');
+                if (option.value === e.currentTarget.value)
+                    option.text = option.getAttribute('data-original-text') + "   \u2705";
+                    // option.text = option.getAttribute('data-original-text') + " \u2705";
             });
         });
     });
 }
 
+
 function insertDetailsModal() {
-    const filmItems = document.querySelectorAll('.film_item', '.film-best');
+    const filmItems = document.querySelectorAll('.film-item', '.film-best');
     const modalTemplate = document.getElementById('film-modal-template').content;
 
     filmItems.forEach(item => {
         const modalContainer = item.querySelector('.modal-container');
         const clone = document.importNode(modalTemplate, true);
-        modalContainer.appendChild(clone);
+        if (modalContainer) {
+            modalContainer.appendChild(clone);
+        }
+
     });
 }
 
 function initFilmModalEvents() {
     document.body.addEventListener('click', function(event) {
         if (event.target.matches('.film-button') || event.target.closest('.film-button')) {
-            const filmItem = event.target.closest('.film_item');
+            const filmItem = event.target.closest('.film-item');
             if (filmItem) {
                 const modal = filmItem.querySelector('.modal');
                 const filmUrl = filmItem.dataset.url; // on récupère l'url stockée dans le dataset
