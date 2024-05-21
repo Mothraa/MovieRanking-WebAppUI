@@ -129,7 +129,6 @@ async function bestFilm(urlBestFilm) {
     const modalTemplate = document.getElementById('film-modal-template').content.cloneNode(true);
     // Ajouter un identifiant ou une classe unique au modal
     const modal = modalTemplate.firstElementChild; // Supposons que le modal est le premier élément enfant du template cloné
-
     filmBestInfo.appendChild(modal);
 
     // TODO récupérer le modal du best film et le passer en paramètre de fetchBestFilm
@@ -139,9 +138,7 @@ async function bestFilm(urlBestFilm) {
         const filmImage = document.getElementById('best-film-image');
         filmImage.src = filmDetails.image_url;
         filmImage.alt = `Affiche ${filmDetails.title}`;
-        // console.log(filmImage);
         const filmTitle = document.getElementById('best-film-title');
-        // console.log(filmTitle);
         filmTitle.textContent = filmDetails.title;
 
         const filmDescription = document.getElementById('best-film-description');
@@ -208,7 +205,6 @@ async function fetchFilmListByCategory(container, url) {
 
     updateDisplay();
     insertDetailsModal(container); // réinitialisation des événements après l'actualisation du contenu
-    // TODO réinitialiser que les contenus ajoutés
 }
 
 function updateDisplay() {
@@ -272,31 +268,33 @@ function updateListSelection(){
             }
         });
 
+        // Ajouter le symbole flèche vers le bas a la cat selectionnée par défaut a l'ouverture
+        const selectedOption = select.options[select.selectedIndex];
+        selectedOption.text = selectedOption.getAttribute('data-original-text') + " \u25BC";
+
         select.addEventListener('focus', function() {
             const selectedOption = this.options[this.selectedIndex];
             selectedOption.text = selectedOption.getAttribute('data-original-text') + " \u2705";
         });
-        // select.addEventListener('blur', function() {
-        //     Array.from(this.options).forEach(option => {
-        //         option.text = option.getAttribute('data-original-text');
-        //         if (option.value === e.currentTarget.value)
-        //             option.text = option.getAttribute('data-original-text') + " \u25BC";
-        //     });
-        // });
-        // select.addEventListener('select', function(e) {
-        //     console.log(e.currentTarget.value);
-        //     Array.from(this.options).forEach(option => {
-        //         option.text = option.getAttribute('data-original-text');
-        //         if (option.value === e.currentTarget.value)
-        //             option.text = option.getAttribute('data-original-text') + " \u25BC";
-        //     });
-        // });
+        select.addEventListener('blur', function() {
+            Array.from(this.options).forEach(option => {
+                option.text = option.getAttribute('data-original-text');
+                if (option.value === this.value)
+                    option.text = option.getAttribute('data-original-text') + " \u25BC";
+            });
+        });
+        select.addEventListener('change', function() {
+            Array.from(this.options).forEach(option => {
+                option.text = option.getAttribute('data-original-text');
+                if (option.value === this.value)
+                    option.text = option.getAttribute('data-original-text') + " \u2705";
+            });
+        });
         select.addEventListener('select', function() {
             Array.from(this.options).forEach(option => {
                 option.text = option.getAttribute('data-original-text');
                 if (option.value === e.currentTarget.value)
                     option.text = option.getAttribute('data-original-text') + "   \u2705";
-                    // option.text = option.getAttribute('data-original-text') + " \u2705";
             });
         });
     });
@@ -327,7 +325,7 @@ function initFilmModalEvents() {
 
                 if (filmUrl && modal) {
                     fetchFilmDetails(filmUrl, modal).then(() => {
-                        modal.style.display = 'block'; // Affiche le modal lorsque les données sont chargées
+                        modal.style.display = 'block'; // Affiche le modal une fois les données chargées
                     });
                 }
             }
@@ -338,7 +336,7 @@ function initFilmModalEvents() {
 
 function setupEvents() {
     // on récupère le modal
-    const modals = document.querySelectorAll(".modal");//, ".film-best .modal");
+    const modals = document.querySelectorAll(".modal");
     // boutons qui ouvrent le modal
     const btns = document.querySelectorAll(".film-button, .film-best-button");
     // boutons qui ferment le modal
