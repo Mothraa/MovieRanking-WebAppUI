@@ -288,35 +288,64 @@ button:hover {
     overflow-x: hidden;
     overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.4);
+
+    /* display: flex; */
+
+    /* max-width: 1000px;  */
 }
 
 
 .modal-content {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 3% auto 3%;;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    box-sizing: border-box;
+    flex: 1 1 100%;
+    justify-content: center;
+    align-items: center;
 }
+/* .modal-content {
+    width: 100%;
+    padding: 5px;
 
-.modal-info {
+} */
+/* .modal-info {
     display: flex;
     flex-direction: row;
-}
-
+    
+} */
+/* 
 .modal-info-left, .modal-info-right {
     flex: auto;
-}
+} */
+
 
 .modal-info-left {
+    order: 1;
+    flex: 1 1 40%;
     padding-left: 20px;
 }
 
 .modal-info-right {
+    order: 2;
+    flex: 1 1 40%;
     padding-right: 20px;
+}
+
+.modal-description {
+    order: 3;
+    flex: 1 1 100%;
+}
+
+.modal-actors {
+    order: 4;
+    flex: 1 1 100%;
 }
 
 .modal-film-image img {
@@ -375,6 +404,7 @@ button:hover {
 }
 
 .close-modal-btn {
+    order: 5;
     width: 214px;
     height: 36px;
     padding-top: 0px;
@@ -426,6 +456,17 @@ cursor: pointer;
     color: black;
 }
 
+/* select {
+    margin: 0;      
+
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  } */
+
+/* fleche vers le bas  	\0025BC
+fleche vers le haut \0025B2 */
+
 /* Media Queries*/
 /* Pour PC */
 @media (min-width: 1024px) {
@@ -442,7 +483,7 @@ cursor: pointer;
         min-width:250px;
     }
     /* doublon avec le media query suivant */
-    /* .film-best-button-container {
+    /* .film-best-close-modal-btn-container {
         flex: 3;
         display: flex;
         position: relative;
@@ -497,7 +538,7 @@ cursor: pointer;
         margin-right: 10px; 
         flex-shrink: 0;
     }
-    .modal-info {
+    /* .modal-info {
         flex-direction: column;
     }
     .modal-info-left, .modal-info-right {
@@ -512,11 +553,24 @@ cursor: pointer;
         justify-content: center;
         align-items: center;
         object-fit: cover;
+    } */
+    .modal-info-right {
+        order: 3;
     }
+    
+    .modal-description {
+        order: 2;
+    }
+
     .close-modal-btn {
         display: none;
     }
     .modal-film-image img {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: auto;
     }
@@ -582,30 +636,41 @@ cursor: pointer;
         margin-right: 12px;
         width: auto;
     }
-
+/* 
     .modal-info {
         flex-direction: column;
     }
-
-    .modal-info-left, .modal-info-right {
-        margin: 0 0 10px 0;
-        width: 100%;
-        /* overflow: auto; */
+*/
+    .modal-info-left {
+        padding-left: 0px;
     }
-
+    /*
     .modal-info-left, .modal-description, .modal-actors {
         padding-left: 0px;
     }
-
+    
     .modal-info-right {
         display: flex;
         justify-content: center;
         align-items: center;
         object-fit: cover;
+    } */
+    .modal-info-right {
+        order: 3;
+        justify-content: center;
+    }
+    
+    .modal-description {
+        order: 2;
+        padding-left: 0px;
+    }
+
+    .modal-actors {
+        padding-left: 0px;
     }
 
     .category_container img {
-        min-width: 300px;
+        min-width: 220px;
         object-fit: cover;
     }
 
@@ -614,16 +679,23 @@ cursor: pointer;
     }
 
     .modal-content {
-        width: 100%;
+        display: flex;
+
+        width: 95%;
         padding: 5px;
-        box-sizing: border-box;
     }
+    /* 
     .modal-film-image {
         display: block;
         margin: 0 auto;
         max-width: 100%;
         height: auto;
-        
+    } */
+    .modal-film-image {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
     }
     .category-selection h1 {
         display: none;

@@ -21,58 +21,7 @@ const urlGenres = "http://localhost:8000/api/v1/genres/";
 const template = document.querySelector("#film-item-template");
 
 
-// function modalInfos(filmData) {
-//   // Remplissage des infos du modal
-//   const modalImage = document.getElementById('modal-film-image');
-//   modalImage.src = filmData.image_url;
-//   modalImage.alt = `Affiche ${filmData.title}`;
-
-//   const modalTitle = document.getElementById('modal-film-title');
-//   modalTitle.textContent = filmData.title;
-
-//   document.getElementById('modal-film-year-genres').textContent = `${filmData.year} - ${filmData.genres.join(', ')}`;
-//   document.getElementById('modal-film-category-duration-contries').textContent = `${filmData.rated} - ${filmData.duration} minutes (${filmData.countries.join(' / ')})`;
-//   document.getElementById('modal-film-imdb').textContent = `IMDB score : ${filmData.imdb_score}/10`;
-//   document.getElementById('modal-film-directors').textContent = filmData.directors.join(', ');
-
-//   const modalDescription = document.getElementById('modal-film-description');
-//   modalDescription.textContent = filmData.long_description;
-
-//   const modalActors = document.getElementById('modal-film-actors');
-//   modalActors.textContent = filmData.actors.join(', ');
-// }
-
-// function modalInfos(modal, filmData) {
-//     // Remplissage des infos du modal
-//     console.log(filmData);
-//     const modalImage = document.querySelector('.modal-film-image');
-//     // console.log(modalImage);
-//     modalImage.src = filmData.image_url || "images/default_image.jpg"; // Fournir une image par défaut si aucune image n'est disponible
-//     modalImage.alt = `Affiche ${filmData.title}`;
-  
-//     const modalTitle = document.querySelector('.modal-film-title');
-//     modalTitle.textContent = filmData.title;
-//     // console.log(modalTitle)
-//     // Gestion de la possibilité que genres soit undefined
-//     const genresText = filmData.genres ? filmData.genres.join(', ') : "N/A";
-//     document.querySelector('.modal-film-year-genres').textContent = `${filmData.year} - ${genresText}`;
-//     // console.log(genresText);
-//     const ratedText = filmData.rated || "Non classé";
-//     const countriesText = filmData.countries ? filmData.countries.join(' / ') : "N/A";
-//     document.querySelector('.modal-film-category-duration-countries').textContent = `${ratedText} - ${filmData.duration} minutes (${countriesText})`;
-//     document.querySelector('.modal-film-imdb').textContent = `IMDB score : ${filmData.imdb_score}/10`;
-//     document.querySelector('.modal-film-directors').textContent = filmData.directors.join(', ');
-  
-//     const modalDescription = document.querySelector('.modal-film-description');
-//     modalDescription.textContent = filmData.long_description;
-  
-//     const modalActors = document.querySelector('.modal-film-actors');
-//     modalActors.textContent = filmData.actors ? filmData.actors.join(', ') : "N/A";
-//   }
-
 function modalInfos(modal, filmData) {
-    // console.log(filmData);  // Affiche les données pour vérifier leur intégrité
-    // console.log(modal);
     const modalImage = modal.querySelector('.modal-film-image');
     modalImage.src = filmData.image_url || "images/default_image.jpg"; // image par défaut si absente
     modalImage.alt = `Affiche ${filmData.title}`;
@@ -91,40 +40,6 @@ function modalInfos(modal, filmData) {
     const modalActors = modal.querySelector('.modal-film-actors');
     modalActors.textContent = filmData.actors ? filmData.actors.join(', ') : "N/A";
 }
-// function modalInfos(filmData) {
-//     // Remplissage des infos du modal
-//     const modalImage = document.querySelector('.modal-film-image');
-//     modalImage.src = filmData.image_url;
-//     modalImage.alt = `Affiche ${filmData.title}`;
-  
-//     const modalTitle = document.querySelector('.modal-film-title');
-//     modalTitle.textContent = filmData.title;
-  
-//     document.querySelector('.modal-film-year-genres').textContent = `${filmData.year} - ${filmData.genres.join(', ')}`;
-//     document.querySelector('.modal-film-category-duration-countries').textContent = `${filmData.rated} - ${filmData.duration} minutes (${filmData.countries.join(' / ')})`;
-//     document.querySelector('.modal-film-imdb').textContent = `IMDB score : ${filmData.imdb_score}/10`;
-//     document.querySelector('.modal-film-directors').textContent = filmData.directors.join(', ');
-  
-//     const modalDescription = document.querySelector('.modal-film-description');
-//     modalDescription.textContent = filmData.long_description;
-  
-//     const modalActors = document.querySelector('.modal-film-actors');
-//     modalActors.textContent = filmData.actors.join(', ');
-//   }
-
-// async function fetchBestFilm(mainUrl) {
-//   url = mainUrl;
-//   try {
-//     const response = await fetch(url);
-//     if (!response.ok) {
-//         throw new Error(`Erreur : ${response.status}`);
-//     }
-//     const films = await response.json();
-//     return films.results[0].url;
-//   } catch(error) {
-//     console.error('Erreur : ', error);
-//   }
-// }
 
 async function fetchBestFilm(mainUrl, modal) {
     try {
@@ -143,8 +58,7 @@ async function fetchBestFilm(mainUrl, modal) {
         }
         const filmDetails = await detailsResponse.json();
 
-        // MAJ du modal avec les détails du film
-        // console.log(modal);
+        // MAJ du modal avec les détails
         modalInfos(modal, filmDetails);
         return filmDetails;
     } catch (error) {
@@ -197,7 +111,6 @@ async function fetchGenres() {
   
             url = data.next;
         }
-  
         // Sélectionner les genres par défaut ou le premier disponible si non existants
         genreSelectCat4.value = defaultGenreCat4
         genreSelectCat5.value = defaultGenreCat5
@@ -294,7 +207,8 @@ async function fetchFilmListByCategory(container, url) {
     }
 
     updateDisplay();
-    insertDetailsModal(container); // Réinitialiser les événements après le chargement du contenu
+    insertDetailsModal(container); // réinitialisation des événements après l'actualisation du contenu
+    // TODO réinitialiser que les contenus ajoutés
 }
 
 function updateDisplay() {
@@ -388,7 +302,7 @@ function insertDetailsModal() {
     });
 }
 
-function initializeFilmModalEvents() {
+function initFilmModalEvents() {
     document.body.addEventListener('click', function(event) {
         if (event.target.matches('.film-button') || event.target.closest('.film-button')) {
             const filmItem = event.target.closest('.film_item');
@@ -458,20 +372,26 @@ function setupEvents() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    // ajout du meilleur film
     await bestFilm(urlBestFilm);
+    // ajout des films des catégories 1 à 3
     await fetchFilmListByCategory(category1, urlCategory1);
     await fetchFilmListByCategory(category2, urlCategory2);
     await fetchFilmListByCategory(category3, urlCategory3);
-    await fetchGenres(); // categories 4 et 5
-
+    // ajout des films des categories 4 et 5
+    await fetchGenres();
+    // actualise la liste avec la case cochée
     updateListSelection();
+    // ajout des modals des films a partir du template
     insertDetailsModal();
-    initializeFilmModalEvents();
+    // TODO a refacto avec setupEvents
+    initFilmModalEvents();
 
 });
 
 window.addEventListener('resize', updateDisplay);
 
+// TODO a déplacer dans une fonction
 const genreSelectCat4 = document.getElementById('genre-select-cat4');
 const genreSelectCat5 = document.getElementById('genre-select-cat5');
 
@@ -492,6 +412,8 @@ btnSeeMore.forEach((button, index) => {
     });
 });
 
+// initialisation des évenements des modaux
 setupEvents();
 
+// actualisation en fonction de l'affichage
 updateDisplay();
