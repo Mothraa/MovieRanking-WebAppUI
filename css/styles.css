@@ -105,7 +105,7 @@ h5 {
 }
 
 .film-best-description {
-    margin-top: 5px; /* a reprendre pour retrecir l'espace */
+    margin-top: 5px;
     flex: 2;
     display: flex;
 }
@@ -427,6 +427,12 @@ cursor: pointer;
     background: white;
     color: black;
 }
+
+select {
+    margin: 0;
+    box-sizing: border-box;
+    appearance: none; /* masque la fleche par défaut du select */
+  }
 
 /* Media Queries*/
 /* Pour PC */
